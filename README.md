@@ -2,3 +2,4 @@
 ## test
 foo
 bar
+buz
