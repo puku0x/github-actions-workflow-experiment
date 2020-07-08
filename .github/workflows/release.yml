@@ -1,0 +1,31 @@
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - uses: actions/checkout@2
+        with:
+          fetch-depth: 0
+      - run: git switch -c staging-${VERSION} ${VERSION}
+        env:
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
+      - uses: actions/github-script@v2
+        env:
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'test'
+              head: 'staging-${VERSION}',
+              base: 'staging'
+            })
