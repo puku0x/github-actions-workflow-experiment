@@ -13,7 +13,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: git switch -c staging-${VERSION} ${VERSION}
+      - run: |
+          git switch -c staging-${VERSION} ${VERSION}
+          git push -u origin staging-${VERSION}
         env:
           VERSION: ${{ steps.get_version.outputs.VERSION }}
       - uses: actions/github-script@v2
