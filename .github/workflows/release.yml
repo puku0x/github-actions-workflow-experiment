@@ -26,6 +26,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'test',
-              head: context.repo.owner + ':staging-${VERSION}',
+              head: context.repo.owner + ':staging-' + process.env.VERSION,
               base: 'staging'
             })
