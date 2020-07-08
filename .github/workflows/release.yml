@@ -10,7 +10,7 @@ jobs:
       - name: Get version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      - uses: actions/checkout@2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - run: git switch -c staging-${VERSION} ${VERSION}
