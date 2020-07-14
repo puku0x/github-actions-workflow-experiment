@@ -4,6 +4,4 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-        echo ${{github.base_ref}}
-        echo ${{github.head_ref}}
+      - run: echo 'PR created'
