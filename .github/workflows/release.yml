@@ -25,20 +25,20 @@ jobs:
         env:
           BRANCH: ${{ matrix.branch }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
-      - name: Create Issue
-        uses: actions/github-script@v2
-        env:
-          BRANCH: ${{ matrix.branch }}
-          VERSION: ${{ steps.get_version.outputs.VERSION }}
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: 'Bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
-              body: 'https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/compare/' + process.env.BRANCH + '...' + process.env.BRANCH + '-' + process.env.VERSION
-            })
+      # - name: Create Issue
+      #   uses: actions/github-script@v2
+      #   env:
+      #     BRANCH: ${{ matrix.branch }}
+      #     VERSION: ${{ steps.get_version.outputs.VERSION }}
+      #   with:
+      #     github-token: ${{secrets.GITHUB_TOKEN}}
+      #     script: |
+      #       github.issues.create({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         title: 'Bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
+      #         body: 'https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/compare/' + process.env.BRANCH + '...' + process.env.BRANCH + '-' + process.env.VERSION
+      #       })
 
       # - name: Create pull request
       #   uses: actions/github-script@v2
@@ -55,3 +55,21 @@ jobs:
       #         head: context.repo.owner + ':' + process.env.BRANCH + '-' + process.env.VERSION,
       #         base: process.env.BRANCH
       #       })
+
+      - name: Create draft pull request
+        uses: actions/github-script@v2
+        env:
+          BRANCH: ${{ matrix.branch }}
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'chore(*): bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
+              head: context.repo.owner + ':' + process.env.BRANCH + '-' + process.env.VERSION,
+              base: process.env.BRANCH,
+              body: 'Bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
+              draft: true
+            })
