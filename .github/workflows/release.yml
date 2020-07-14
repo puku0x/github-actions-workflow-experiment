@@ -1,3 +1,5 @@
+name: Release Pull Request
+
 on:
   push:
     tags:
