@@ -1,4 +1,4 @@
-name: Create deploy issue
+name: Release
 
 on:
   push:
@@ -72,4 +72,8 @@ jobs:
               base: process.env.BRANCH,
               body: 'Bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
               draft: true
+            })
+            github.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo
             })
