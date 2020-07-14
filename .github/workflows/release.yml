@@ -6,6 +6,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: ['staging']
     steps:
       - name: Get version
         id: get_version
@@ -13,13 +16,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: |
-          git switch -c staging-${VERSION} ${VERSION}
-          git push -u origin staging-${VERSION}
+      - name: Push branch
+        run: |
+          git switch -c ${BRANCH}-${VERSION} ${VERSION}
+          git push -u origin ${BRANCH}-${VERSION}
         env:
+          BRANCH: ${{ matrix.branch }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
       - uses: actions/github-script@v2
         env:
+          BRANCH: ${{ matrix.branch }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -28,6 +34,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'test',
-              head: context.repo.owner + ':staging-' + process.env.VERSION,
-              base: 'staging'
+              head: context.repo.owner + ':' + process.env.BRANCH + '-' + process.env.VERSION,
+              base: process.env.BRANCH
             })
