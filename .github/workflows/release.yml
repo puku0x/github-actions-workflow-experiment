@@ -25,7 +25,8 @@ jobs:
         env:
           BRANCH: ${{ matrix.branch }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
-      - uses: actions/github-script@v2
+      - name: Create pull request
+        uses: actions/github-script@v2
         env:
           BRANCH: ${{ matrix.branch }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
