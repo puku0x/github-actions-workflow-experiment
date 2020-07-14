@@ -33,7 +33,7 @@ jobs:
             github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: 'test',
+              title: 'chore(*): bump ' + process.env.BRANCH + process.env.VERSION,
               head: context.repo.owner + ':' + process.env.BRANCH + '-' + process.env.VERSION,
               base: process.env.BRANCH
             })
