@@ -11,8 +11,10 @@ jobs:
           fetch-depth: 0
       - name: Switch branch
         run: git switch -c tmp
-      - name: Bump version
-        run: npm run release
+      - name: Git config
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
       - name: Get version
         id: get_version
         run: |
