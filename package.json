@@ -1,0 +1,11 @@
+{
+  "name": "github-pr-experimental",
+  "version": "0.0.1",
+  "description": "test",
+  "scripts": {
+    "commit": "npx git-cz",
+    "release": "npx standard-version --releaseCommitMessageFormat 'chore(*): bump v{{currentTag}}'"
+  },
+  "author": "puku0x",
+  "license": "MIT"
+}
