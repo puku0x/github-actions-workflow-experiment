@@ -31,11 +31,11 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           #github-token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
-        script: |
-          github.pulls.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: 'chore(*): bump ' + process.env.VERSION,
-            head: context.repo.owner + ':' + 'bump-' + process.env.VERSION,
-            base: master
-          })
+          script: |
+            github.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: 'chore(*): bump ' + process.env.VERSION,
+                head: context.repo.owner + ':' + 'bump-' + process.env.VERSION,
+                base: master
+            })
