@@ -29,8 +29,8 @@ jobs:
         env:
           VERSION: ${{ steps.get_version.outputs.VERSION }}
         with:
-          #github-token: ${{secrets.GITHUB_TOKEN}}
-          github-token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          #github-token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
         script: |
           github.pulls.create({
             owner: context.repo.owner,
