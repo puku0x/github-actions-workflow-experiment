@@ -15,6 +15,9 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+      - name: Get branch
+        id: get_branch
+        run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}  
       - name: Get version
         id: get_version
         run: |
@@ -29,7 +32,7 @@ jobs:
       - name: Create pull request
         uses: actions/github-script@v2
         env:
-          BASE_BRANCH: ${{ github.ref }}
+          BRANCH: ${{ steps.get_branch.outputs.BRANCH }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -40,5 +43,5 @@ jobs:
                 repo: context.repo.repo,
                 title: 'chore(*): bump ' + process.env.VERSION,
                 head: context.repo.owner + ':' + 'bump-' + process.env.VERSION,
-                base: process.env.BASE_BRANCH
+                base: process.env.BRANCH
             })
