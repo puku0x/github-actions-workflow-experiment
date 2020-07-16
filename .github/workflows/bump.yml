@@ -23,6 +23,8 @@ jobs:
         run: |
           PACKAGE_VERSION=cat package.json | grep version | cut -d " " -f 4 | tr -d "," | tr -d '"'
           echo ::set-output name=VERSION::v${PACKAGE_VERSION}
+      - name: Bump version
+        run: npm run release  
       - name: Push branch
         run: |
           git branch -m bump-${VERSION}
