@@ -20,9 +20,7 @@ jobs:
         run: echo ::set-output name=BRANCH::${GITHUB_REF/refs\/heads\//}  
       - name: Get version
         id: get_version
-        run: |
-          PACKAGE_VERSION=cat package.json | grep version | cut -d " " -f 4 | tr -d "," | tr -d '"'
-          echo ::set-output name=VERSION::v${PACKAGE_VERSION}
+        run: echo ::set-output name=VERSION::v$(cat package.json | grep version | cut -d " " -f 4 | tr -d "," | tr -d '"')
       - name: Bump version
         run: npm run release  
       - name: Push branch
