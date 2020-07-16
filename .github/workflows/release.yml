@@ -1,3 +1,5 @@
+name: Release
+
 on:
   pull_request:
     branches:
@@ -11,19 +13,19 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Get version
-        run: echo ::set-eoutput name=VERSION::${HEAD_REF#bump-v}
-        env:
+      run: echo ::set-eoutput name=VERSION::${HEAD_REF#bump-v}
+      env:
         HEAD_REF: ${{ github.event.pull_request.head.ref }}
     # - name: Build project
     #   run: |
     #     zip --junk-paths my-artifact README.md
     - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
+      id: create_release
+      uses: actions/create-release@v1
+      env:
         VERSION: ${{ steps.get_version.outputs.VERSION }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
+      with:
         tag_name: v${VERSION}
         release_name: v${VERSION}
         draft: false
