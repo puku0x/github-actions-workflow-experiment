@@ -24,7 +24,7 @@ jobs:
       with:
         tag_name: ${{ steps.get_version.outputs.VERSION }}
         release_name: ${{ steps.get_version.outputs.VERSION }}
-        body: |
+        body: |+
           ## Bug fixes
           - 
 
