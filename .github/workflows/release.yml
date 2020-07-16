@@ -13,6 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Get version
+      id: get_version
       run: echo ::set-eoutput name=VERSION::${HEAD_REF#bump-v}
       env:
         HEAD_REF: ${{ github.event.pull_request.head.ref }}
@@ -24,5 +25,14 @@ jobs:
       with:
         tag_name: ${{ steps.get_version.outputs.VERSION }}
         release_name: ${{ steps.get_version.outputs.VERSION }}
+        body: |+
+          ## Bug fixes
+          - 
+
+          ## Features
+          - 
+
+          ## BREAKING CHANGES
+          - 
         draft: false
         prerelease: false
