@@ -4,8 +4,14 @@
   "description": "test",
   "scripts": {
     "commit": "npx git-cz",
-    "release": "npx standard-version --releaseCommitMessageFormat 'chore(*): bump v{{currentTag}}'"
+    "release": "npx standard-version"
   },
   "author": "puku0x",
-  "license": "MIT"
+  "license": "MIT",
+  "standard-version": {
+    "releaseCommitMessageFormat": "chore(*): bump v{{currentTag}}",
+    "skip": {
+      "tag": true
+    }
+  }
 }
