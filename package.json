@@ -4,19 +4,16 @@
   "description": "test",
   "scripts": {
     "commit": "npx git-cz",
-    "release": "npx standard-version",
-    "release-it": "npx release-it"
+    "release": "npx standard-version"
   },
   "author": "puku0x",
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "~11.0.0",
     "@commitlint/config-conventional": "~11.0.0",
-    "@release-it/conventional-changelog": "~2.0.0",
     "commitizen": "~4.2.0",
     "cz-conventional-changelog": "~3.3.0",
-    "husky": "~4.3.0",
-    "release-it": "~14.2.0"
+    "husky": "~4.3.0"
   },
   "standard-version": {
     "releaseCommitMessageFormat": "chore(*): bump v{{currentTag}}",
@@ -37,29 +34,6 @@
   "husky": {
     "hooks": {
       "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "release-it": {
-    "requireUpstream": false,
-    "requireCleanWorkingDir": false,
-    "git": {
-      "commit": true,
-      "push": false,
-      "tag": false,
-      "commitMessage": "chore(*): bump v${version}"
-    },
-    "github": {
-      "release": false,
-      "releaseName": "v${version}"
-    },
-    "npm": {
-      "publish": false
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular",
-        "infile": "CHANGELOG.md"
-      }
     }
   }
 }
