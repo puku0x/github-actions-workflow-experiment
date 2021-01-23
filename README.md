@@ -2,4 +2,3 @@
 
 ## test
 foo
-bar
