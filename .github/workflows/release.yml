@@ -17,7 +17,12 @@ jobs:
       run: echo ::set-output name=VERSION::${HEAD_REF#bump-v}
       env:
         HEAD_REF: ${{ github.event.pull_request.head.ref }}
-    - name: Create Release
+    - name: Extract changelog
+      id: extract_changelog
+      run: echo ::set-output name=CHANGELOG::$(bash extract-release-note.sh)
+      env:
+        VERSION: ${{ github.get_version.outputs.VERSION }}
+    - name: Create release
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -26,14 +31,6 @@ jobs:
       with:
         tag_name: v${{ steps.get_version.outputs.VERSION }}
         release_name: v${{ steps.get_version.outputs.VERSION }}
-        body: |+
-          ## Bug fixes
-          - 
-
-          ## Features
-          - 
-
-          ## BREAKING CHANGES
-          - 
+        body: ${{ steps.extract_changelog.outputs.CHANGELOG }}
         draft: false
         prerelease: false
