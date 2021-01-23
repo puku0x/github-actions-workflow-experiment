@@ -3,4 +3,3 @@
 ## test
 foo
 bar
-hoge
