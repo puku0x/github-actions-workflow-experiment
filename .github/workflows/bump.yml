@@ -23,6 +23,11 @@ jobs:
         run: |
           npm run release
           echo ::set-output name=VERSION::v$(node -p "require('./package.json').version")
+      - name: Extract changelog
+        id: extract_changelog
+        run: echo ::set-output name=CHANGELOG::$(bash extract-release-note.sh)
+        env:
+          VERSION: ${{ github.bump_version.outputs.VERSION }}
       - name: Push branch
         run: |
           git branch -m bump-${VERSION}
@@ -33,6 +38,7 @@ jobs:
         uses: actions/github-script@v2
         env:
           BRANCH: ${{ steps.get_branch.outputs.BRANCH }}
+          CHANGELOG: ${{ steps.extract_changelog.outputs.CHANGELOG }}
           VERSION: ${{ steps.bump_version.outputs.VERSION }}
         with:
           #github-token: ${{secrets.GITHUB_TOKEN}}
@@ -43,5 +49,6 @@ jobs:
               repo: context.repo.repo,
               title: 'chore(*): bump ' + process.env.VERSION,
               head: context.repo.owner + ':' + 'bump-' + process.env.VERSION,
-              base: process.env.BRANCH
+              base: process.env.BRANCH,
+              body: process.env.CHANGELOG
             })
