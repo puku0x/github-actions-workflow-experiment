@@ -1,4 +1,4 @@
 # github-actions-workflow-experiment
 
 ## test
-foo
+foo bar
