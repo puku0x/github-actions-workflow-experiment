@@ -25,7 +25,10 @@ jobs:
           echo ::set-output name=VERSION::v$(node -p "require('./package.json').version")
       - name: Extract changelog
         id: extract_changelog
-        run: echo ::set-output name=CHANGELOG::$(bash .github/scripts/extract-release-note.sh)
+        run: |
+          changelog=$(bash .github/scripts/extract-release-note.sh)
+          changelog="${changelog//$'\n'/\\n}"
+          echo ::set-output name=CHANGELOG::$changelog
         env:
           VERSION: ${{ github.bump_version.outputs.VERSION }}
       - name: Push branch
