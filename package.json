@@ -44,6 +44,8 @@
     "requireCleanWorkingDir": false,
     "git": {
       "commit": true,
+      "push": false,
+      "tag": false,
       "commitMessage": "chore(*): bump v${version}"
     },
     "github": {
