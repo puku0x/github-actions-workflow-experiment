@@ -8,10 +8,18 @@
   },
   "author": "puku0x",
   "license": "MIT",
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
   "standard-version": {
     "releaseCommitMessageFormat": "chore(*): bump v{{currentTag}}",
     "skip": {
       "tag": true
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   }
 }
