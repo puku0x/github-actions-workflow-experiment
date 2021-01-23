@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/puku0x/github-actions-workflow-experiment/compare/v0.0.10...v0.0.12) (2021-01-23)
+
+
+### Features
+
+* add extract-release-note.sh ([9533904](https://github.com/puku0x/github-actions-workflow-experiment/commit/9533904e77a9d853ce53a73230af3baaa87a09f1))
+
 ### [0.0.11](https://github.com/puku0x/github-actions-workflow-experiment/compare/v0.0.10...v0.0.11) (2021-01-22)
 
 ### 0.0.10 (2020-07-16)
