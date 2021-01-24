@@ -1,5 +1,4 @@
-# github-pr-experimental
+# github-actions-workflow-experiment
+
 ## test
-foo
-bar
-buz
+foo bar
