@@ -26,9 +26,8 @@ jobs:
       - name: Extract changelog
         id: extract_changelog
         run: |
-          changelog=$(git diff -u -U0 HEAD^ HEAD CHANGELOG.md | tail -n +6 | sed "s/^\+//")
-          changelog="${changelog//$'\n'/\\n}"
-          echo ::set-output name=CHANGELOG::$changelog
+          changelog=$(git diff -u -U0 HEAD^ CHANGELOG.md | tail -n +6 | sed "s/^\+//")
+          echo ::set-output name=CHANGELOG::${changelog//$'\n'/\\n}
         env:
           VERSION: ${{ github.bump_version.outputs.VERSION }}
       - name: Push branch
