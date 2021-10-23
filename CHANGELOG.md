@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/puku0x/github-actions-workflow-experiment/compare/v0.3.0...v0.3.1) (2021-10-23)
+
+
+### Bug Fixes
+
+* **readme:** fix README.md ([f0d8a57](https://github.com/puku0x/github-actions-workflow-experiment/commit/f0d8a57fad7319b3e71fe8b8e83e3e6fa1c13dea))
+
 ## [0.3.0](https://github.com/puku0x/github-actions-workflow-experiment/compare/v0.2.1...v0.3.0) (2021-01-24)
 
 
