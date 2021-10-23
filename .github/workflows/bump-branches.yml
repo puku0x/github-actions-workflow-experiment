@@ -14,26 +14,27 @@ jobs:
     steps:
       - name: Get version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - name: Push branch
-        run: |
-          git switch -c ${BRANCH}-${VERSION} ${VERSION}
-          git push -u origin ${BRANCH}-${VERSION}
         env:
           BRANCH: ${{ matrix.branch }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
+        run: |
+          git switch -c ${BRANCH}-v${VERSION} v${VERSION}
+          git push -u origin ${BRANCH}-v${VERSION}
+
       # - name: Create Issue
-      #   uses: actions/github-script@v2
+      #   uses: actions/github-script@v5
       #   env:
       #     BRANCH: ${{ matrix.branch }}
       #     VERSION: ${{ steps.get_version.outputs.VERSION }}
       #   with:
       #     github-token: ${{secrets.GITHUB_TOKEN}}
       #     script: |
-      #       github.issues.create({
+      #       github.rest.issues.create({
       #         owner: context.repo.owner,
       #         repo: context.repo.repo,
       #         title: 'Bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
@@ -41,7 +42,7 @@ jobs:
       #       })
 
       - name: Create pull request
-        uses: actions/github-script@v2
+        uses: actions/github-script@v5
         env:
           BRANCH: ${{ matrix.branch }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
@@ -49,29 +50,11 @@ jobs:
           #github-token: ${{secrets.GITHUB_TOKEN}}
           github-token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
           script: |
-            github.pulls.create({
+            github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: 'chore(*): bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
-              head: context.repo.owner + ':' + process.env.BRANCH + '-' + process.env.VERSION,
+              title: `chore(*): bump ${process.env.BRANCH} v${process.env.VERSION}`,
+              body: `Bump ${process.env.BRANCH} [v${process.env.VERSION}](https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/v${process.env.VERSION})`,
+              head: `${context.repo.owner}:${process.env.BRANCH}-v${process.env.VERSION}`,
               base: process.env.BRANCH
             })
-
-      # - name: Create draft pull request
-      #   uses: actions/github-script@v2
-      #   env:
-      #     BRANCH: ${{ matrix.branch }}
-      #     VERSION: ${{ steps.get_version.outputs.VERSION }}
-      #   with:
-      #     github-token: ${{secrets.GITHUB_TOKEN}}
-      #     script: |
-      #       github.pulls.create({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         title: 'chore(*): bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
-      #         head: context.repo.owner + ':' + process.env.BRANCH + '-' + process.env.VERSION,
-      #         base: process.env.BRANCH,
-      #         body: 'Bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
-      #         draft: true
-      #       })
-
