@@ -4,36 +4,32 @@
   "description": "test",
   "scripts": {
     "commit": "npx git-cz",
+    "prepare": "husky install",
     "release": "npx standard-version"
   },
   "author": "puku0x",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "~11.0.0",
-    "@commitlint/config-conventional": "~11.0.0",
+    "@commitlint/cli": "~13.2.0",
+    "@commitlint/config-conventional": "~13.2.0",
     "commitizen": "~4.2.0",
     "cz-conventional-changelog": "~3.3.0",
-    "husky": "~4.3.0"
-  },
-  "standard-version": {
-    "releaseCommitMessageFormat": "chore(*): bump v{{currentTag}}",
-    "skip": {
-      "tag": true
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+    "husky": "~7.0.0"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS"
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "standard-version": {
+    "releaseCommitMessageFormat": "chore(*): bump v{{currentTag}}",
+    "skip": {
+      "tag": true
     }
   }
 }
