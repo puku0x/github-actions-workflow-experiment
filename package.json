@@ -3,17 +3,17 @@
   "version": "0.3.1",
   "description": "test",
   "scripts": {
-    "commit": "npx git-cz",
+    "commit": "cz",
     "prepare": "husky install",
     "release": "npx standard-version"
   },
   "author": "puku0x",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "~13.2.0",
-    "@commitlint/config-conventional": "~13.2.0",
+    "@commitlint/cli": "~14.1.0",
+    "@commitlint/config-conventional": "~14.1.0",
+    "@commitlint/cz-commitlint": "~14.1.0",
     "commitizen": "~4.2.0",
-    "cz-conventional-changelog": "~3.3.0",
     "husky": "~7.0.0"
   },
   "commitlint": {
@@ -23,7 +23,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "@commitlint/cz-commitlint"
     }
   },
   "standard-version": {
