@@ -56,8 +56,7 @@ jobs:
           CHANGELOG: ${{ steps.extract_changelog.outputs.CHANGELOG }}
           VERSION: ${{ steps.bump_version.outputs.VERSION }}
         with:
-          #github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.pulls.create({
               owner: context.repo.owner,
