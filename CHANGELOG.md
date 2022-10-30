@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/puku0x/github-actions-workflow-experiment/compare/v0.3.3...v0.4.0) (2022-10-30)
+
+
+### Features
+
+* add sample.txt ([9c140d4](https://github.com/puku0x/github-actions-workflow-experiment/commit/9c140d436334ce508387fc9e07175e3260af3fc7))
+
 ### [0.3.3](https://github.com/puku0x/github-actions-workflow-experiment/compare/v0.3.2...v0.3.3) (2022-10-30)
 
 ### [0.3.2](https://github.com/puku0x/github-actions-workflow-experiment/compare/v0.3.1...v0.3.2) (2022-10-30)
