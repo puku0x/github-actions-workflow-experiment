@@ -9,6 +9,6 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         with:
           command: release-pr
-          pull-request-title-pattern: "chore(*): bump v${version}"
+          # pull-request-title-pattern: "chore(*): bump v${version}"
           release-type: node
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
