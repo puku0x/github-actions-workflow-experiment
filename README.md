@@ -36,19 +36,3 @@ npm install -D @commitlint/cli @commitlint/config-conventional
   }
 }
 ```
-
-### standard-version
-
-```
-{
-  "scripts": {
-    "release": "npx standard-version"
-  },
-  "standard-version": {
-    "releaseCommitMessageFormat": "chore(*): bump v{{currentTag}}",
-    "skip": {
-      "tag": true
-    }
-  }
-}
-```
