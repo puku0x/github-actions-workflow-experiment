@@ -5,27 +5,13 @@ on:
     branches:
       - master
     types: [closed]
-  
+
 jobs:
   release:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'bump-v')
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Get version
-      id: get_version
-      env:
-        HEAD_REF: ${{ github.event.pull_request.head.ref }}
-      run: echo ::set-output name=VERSION::${HEAD_REF#bump-v}
-    - name: Create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_TOKEN: ${{secrets.PERSONAL_ACCESS_TOKEN}}
-      with:
-        tag_name: v${{ steps.get_version.outputs.VERSION }}
-        release_name: v${{ steps.get_version.outputs.VERSION }}
-        body: ${{ github.event.pull_request.body }}
-        draft: false
-        prerelease: false
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          command: github-release
+          release-type: node
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
