@@ -1,11 +1,10 @@
 {
-  "name": "github-pr-experimental",
-  "version": "0.3.3",
+  "name": "github-actions-workflow-experiment",
+  "version": "0.5.0",
   "description": "test",
   "scripts": {
     "commit": "cz",
-    "prepare": "husky install",
-    "release": "npx standard-version"
+    "prepare": "husky install"
   },
   "author": "puku0x",
   "license": "MIT",
@@ -24,12 +23,6 @@
   "config": {
     "commitizen": {
       "path": "@commitlint/cz-commitlint"
-    }
-  },
-  "standard-version": {
-    "releaseCommitMessageFormat": "chore(*): bump v{{currentTag}}",
-    "skip": {
-      "tag": true
     }
   }
 }
