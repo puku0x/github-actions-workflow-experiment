@@ -9,10 +9,10 @@ jobs:
       matrix:
         node: ['16']
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cache
         with:
           path: node_modules
@@ -27,7 +27,7 @@ jobs:
           git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --local user.name "${GITHUB_ACTOR}"
       - name: Setup Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
@@ -50,7 +50,7 @@ jobs:
           git branch -m bump-v${VERSION}
           git push -u origin bump-v${VERSION}
       - name: Create pull request
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         env:
           BRANCH: ${{ steps.get_branch.outputs.BRANCH }}
           CHANGELOG: ${{ steps.extract_changelog.outputs.CHANGELOG }}
