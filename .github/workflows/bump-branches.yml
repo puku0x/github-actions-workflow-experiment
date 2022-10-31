@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Get version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -25,21 +25,6 @@ jobs:
         run: |
           git switch -c ${BRANCH}-v${VERSION} v${VERSION}
           git push -u origin ${BRANCH}-v${VERSION}
-
-      # - name: Create Issue
-      #   uses: actions/github-script@v6
-      #   env:
-      #     BRANCH: ${{ matrix.branch }}
-      #     VERSION: ${{ steps.get_version.outputs.VERSION }}
-      #   with:
-      #     github-token: ${{secrets.GITHUB_TOKEN}}
-      #     script: |
-      #       github.rest.issues.create({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         title: 'Bump ' + process.env.BRANCH + ' ' + process.env.VERSION,
-      #         body: 'https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/compare/' + process.env.BRANCH + '...' + process.env.BRANCH + '-' + process.env.VERSION
-      #       })
 
       - name: Create pull request
         uses: actions/github-script@v6
